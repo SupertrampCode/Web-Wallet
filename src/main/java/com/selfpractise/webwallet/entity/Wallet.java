@@ -3,7 +3,6 @@ package com.selfpractise.webwallet.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
@@ -33,9 +32,9 @@ public class Wallet {
 
     BigDecimal balance;
 
-    @OneToMany(mappedBy = "wallet",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Income> incomesList;
 
-    @OneToMany(mappedBy = "wallet",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "wallet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Expense> expensesList;
 }

@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-
 @Entity
 @Getter
 @Setter
@@ -29,15 +26,13 @@ public class Account {
     String email;
 
     @OneToOne
-            @JoinColumn(name = "wallet_id")
+    @JoinColumn(name = "wallet_id")
     Wallet wallet;
 
     public Account(String name, int age, String email) {
         this.name = name;
         this.age = age;
-        this.email=email;
-        this.wallet = new Wallet();
-        this.wallet.setAccount(this);
+        this.email = email;
     }
 
 }

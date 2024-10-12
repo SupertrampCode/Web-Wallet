@@ -2,12 +2,12 @@ package com.selfpractise.webwallet.controller;
 
 import com.selfpractise.webwallet.controller.dto.AccountRequestDTO;
 import com.selfpractise.webwallet.controller.dto.AccountResponseDTO;
-import com.selfpractise.webwallet.entity.Account;
 import com.selfpractise.webwallet.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class AccountController {
@@ -28,11 +28,15 @@ public class AccountController {
     }
 
     @GetMapping("accounts/{id}")
-    public AccountResponseDTO getById (@PathVariable Long id){
+    public AccountResponseDTO getById(@PathVariable Long id) {
         return new AccountResponseDTO(accountService.getById(id));
     }
+
     @GetMapping("/accounts")
-    public List<Account> getAccounts(){
-        return accountService.getAccounts();
+    public List<AccountResponseDTO> getAccounts() {
+        return accountService.getAccounts()
+                .stream()
+                .map(AccountResponseDTO::new)
+                .collect(Collectors.toList());
     }
 }

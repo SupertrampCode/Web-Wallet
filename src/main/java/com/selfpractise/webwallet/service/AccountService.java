@@ -26,8 +26,8 @@ public class AccountService {
 
     public Long createAccount(String name, int age, String email) {
         Account account = new Account(name, age, email);
-        Wallet wallet= account.getWallet();
-        wallet.setAccount(account);
+        Wallet wallet = new Wallet();
+        account.setWallet(wallet);
         walletRepository.save(wallet);
         return accountRepository.save(account).getId();
     }

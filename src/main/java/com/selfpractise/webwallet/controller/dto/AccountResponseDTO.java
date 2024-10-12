@@ -29,6 +29,5 @@ public class AccountResponseDTO {
         age=account.getAge();
         email = account.getEmail();
         wallet=new WalletResponseDTO(account.getWallet());
-
     }
 }
