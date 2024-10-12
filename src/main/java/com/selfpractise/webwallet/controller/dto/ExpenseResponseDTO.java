@@ -1,10 +1,17 @@
 package com.selfpractise.webwallet.controller.dto;
 
 import com.selfpractise.webwallet.entity.Expense;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ExpenseResponseDTO {
     Long id;
 
@@ -13,8 +20,8 @@ public class ExpenseResponseDTO {
     OffsetDateTime transactionTime;
 
     public ExpenseResponseDTO(Expense expense){
-        id= expense.getId();
-        amount=expense.getAmount();
-        transactionTime=expense.getTransactionTime();
+        this.id= expense.getId();
+        this.amount=expense.getAmount();
+        this.transactionTime=expense.getTransactionTime();
     }
 }

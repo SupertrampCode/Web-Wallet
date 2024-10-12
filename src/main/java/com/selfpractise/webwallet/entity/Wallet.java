@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Wallet {
 
@@ -23,17 +22,20 @@ public class Wallet {
     @Setter(AccessLevel.NONE)
     Long id;
 
-    public Wallet(BigDecimal balance) {
-        this.balance = balance;
+    public Wallet() {
+        this.balance = BigDecimal.ZERO;
         this.incomesList = new ArrayList<>();
         this.expensesList = new ArrayList<>();
     }
 
+    @OneToOne(mappedBy = "wallet", cascade = CascadeType.ALL)
+    Account account;
+
     BigDecimal balance;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "wallet",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Income> incomesList;
 
-    @OneToMany
+    @OneToMany(mappedBy = "wallet",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     List<Expense> expensesList;
 }

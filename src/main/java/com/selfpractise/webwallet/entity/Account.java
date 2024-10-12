@@ -29,13 +29,15 @@ public class Account {
     String email;
 
     @OneToOne
+            @JoinColumn(name = "wallet_id")
     Wallet wallet;
 
     public Account(String name, int age, String email) {
         this.name = name;
         this.age = age;
         this.email=email;
-        this.wallet = new Wallet(new BigDecimal(0),new ArrayList<Income>(),new ArrayList<Expense>());
+        this.wallet = new Wallet();
+        this.wallet.setAccount(this);
     }
 
 }

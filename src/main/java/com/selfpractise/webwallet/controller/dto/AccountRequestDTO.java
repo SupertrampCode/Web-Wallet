@@ -18,19 +18,15 @@ public class AccountRequestDTO {
 
     String email;
 
-    Wallet wallet;
-
-    public AccountRequestDTO(String name, int age, Wallet wallet, String email) {
+    public AccountRequestDTO(String name, int age, String email) {
         this.name = name;
         this.age = age;
-        this.wallet = wallet;
         this.email=email;
     }
 
     public AccountRequestDTO(Account account){
         name=account.getName();
         age= account.getAge();
-        wallet=account.getWallet();
         email=account.getEmail();
     }
 }
