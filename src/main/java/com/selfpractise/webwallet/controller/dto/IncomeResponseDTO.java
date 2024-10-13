@@ -1,13 +1,13 @@
 package com.selfpractise.webwallet.controller.dto;
 
 import com.selfpractise.webwallet.entity.Income;
+import com.selfpractise.webwallet.utils.DateTimeFormatting;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -17,11 +17,12 @@ public class IncomeResponseDTO {
 
     BigDecimal amount;
 
-    OffsetDateTime transactionTime;
+    String transactionTime;
 
-    public IncomeResponseDTO (Income income){
-        this.id= income.getId();
-        this.amount=income.getAmount();
-        this.transactionTime=income.getTransactionTime();
+    public IncomeResponseDTO(Income income) {
+        this.id = income.getId();
+        this.amount = income.getAmount();
+        this.transactionTime = DateTimeFormatting.formatDate(income.getTransactionTime());
     }
+
 }

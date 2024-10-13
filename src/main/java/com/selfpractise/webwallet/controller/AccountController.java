@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("web_wallet/accounts")
 public class AccountController {
 
     private final AccountService accountService;
@@ -19,7 +20,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping("/accounts")
+    @PostMapping("/create_account")
     public Long createAccount(@RequestBody AccountRequestDTO accountRequestDTO) {
         return accountService.createAccount(
                 accountRequestDTO.getName(),
@@ -27,16 +28,17 @@ public class AccountController {
                 accountRequestDTO.getEmail());
     }
 
-    @GetMapping("accounts/{id}")
+    @GetMapping("/{id}")
     public AccountResponseDTO getById(@PathVariable Long id) {
         return new AccountResponseDTO(accountService.getById(id));
     }
 
-    @GetMapping("/accounts")
+    @GetMapping
     public List<AccountResponseDTO> getAccounts() {
         return accountService.getAccounts()
                 .stream()
                 .map(AccountResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
 }

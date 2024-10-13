@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-@Entity
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
+@Entity
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
+            @Column(name = "account_id")
     Long id;
 
     String name;
@@ -25,8 +26,7 @@ public class Account {
 
     String email;
 
-    @OneToOne
-    @JoinColumn(name = "wallet_id")
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     Wallet wallet;
 
     public Account(String name, int age, String email) {

@@ -17,7 +17,6 @@ import java.util.List;
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
     Long id;
 
@@ -27,7 +26,9 @@ public class Wallet {
         this.expensesList = new ArrayList<>();
     }
 
-    @OneToOne(mappedBy = "wallet", cascade = CascadeType.ALL)
+    @OneToOne
+            @MapsId
+            @JoinColumn(name="account_id")
     Account account;
 
     BigDecimal balance;
