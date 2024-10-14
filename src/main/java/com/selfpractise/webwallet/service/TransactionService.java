@@ -1,5 +1,6 @@
 package com.selfpractise.webwallet.service;
 
+import com.selfpractise.webwallet.entity.Expense;
 import com.selfpractise.webwallet.entity.Income;
 import com.selfpractise.webwallet.entity.Wallet;
 import com.selfpractise.webwallet.repository.ExpenseRepository;
@@ -30,5 +31,20 @@ public class TransactionService {
         wallet.getIncomesList().add(incomeRepository.save(income));
         wallet.setBalance(wallet.getBalance().add(amount));
         return walletService.saveWallet(wallet);
+    }
+
+    public Wallet createExpense(Long id, BigDecimal amount) {
+        Wallet wallet = walletService.getWallet(id);
+        Expense expense = new Expense(amount);
+        expense.setWallet(wallet);
+        wallet.getExpensesList().add(expenseRepository.save(expense));
+        wallet.setBalance(wallet.getBalance().subtract(amount));
+        return walletService.saveWallet(wallet);
+    }
+
+    public Wallet transfer(Long accountFromId, Long accountToId, BigDecimal amount) {
+        Wallet walletFrom = createExpense(accountFromId, amount);
+        topUpBalance(accountToId, amount);
+        return walletFrom;
     }
 }
