@@ -6,6 +6,7 @@ import com.selfpractise.webwallet.repository.AccountRepository;
 import com.selfpractise.webwallet.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -39,6 +40,7 @@ public class AccountService {
                 .orElseThrow(() -> new NoSuchElementException("Account with id: " + id + " doesn't exist!"));
     }
 
+    @Transactional(readOnly = true)
     public List<Account> getAccounts() {
         return accountRepository.findAll();
     }
